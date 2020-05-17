@@ -1,19 +1,23 @@
 import React from 'react'
+import Person from './Person'
 
-const Person = ({ person }) => {
+const Persons    = ({ person , fiterAll }) => {
+	
+	const personsToShow = (fiterAll === '') ? person : person.filter(person1 => person1.name.toLowerCase().includes(fiterAll.toLowerCase()) )
   return (
-    <tbody> 
+  <table>
+   <tbody> 
 	<tr>
-	<td>Name</td>
-	<td>Phone</td>
-	</tr>
-	<tr><td>
-	{person.name}
-</td>    
-	<td> {person.number} </td></tr>
-	 
-	 </tbody>
+    <th>First name</th>
+    <th>Last name</th>
+  </tr>
+    
+       {personsToShow.map((person) =>
+         <Person key={person.id} person={person} />
+       )}
+     </tbody>
+		
+	</table>
   )
 }
-
-export default Person
+export default Persons
